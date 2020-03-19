@@ -1,0 +1,278 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+
+   <title>Mapping Sustainability in Tampere</title>
+
+	<meta name="keywords" content="Tampere, sustainable, sustainability, student, map, local, second hand, repair, public, common">
+
+
+   	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+   
+
+	<style> 
+		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;}
+		.leaflet-popup-content-wrapper {border-radius: 25 px; border: 2 px solid #black; background: white; color: black; font-size: 18 px;}
+		.leaflet-popup-tip {background: green} 
+		.legend {
+  			padding: 10px 5px;
+ 			font: 14px sans-serif;
+  			background: white;
+  			background: rgba(255, 255, 255, 0.8);
+  			border: 2px solid green;
+  			border-radius: 40px 15px;
+  			line-height: 24px;
+  			color: black;
+			}
+			.legend h4 {
+  			text-align: center;
+  			font-size: 16px;
+  			margin: 2px 12px 8px;
+  			color: black;
+			}
+
+			.legend span {
+  			padding-left: 5px;
+  			text-align: center;
+			}
+			.leaflet-control-layers {
+			padding: 10px 5px;
+			font: 14px sans-serif;
+  			background: white;
+  			background: rgba(255, 255, 255, 0.8);
+  			border-radius: 40px 15px;
+  			color: black;
+  			}
+  			.legendcat {
+  			text-align:center;
+  			padding-left:5px;
+  			margin-top:2px;
+  			font-size:14px}
+
+  			h3 {text-align: center;}
+			ul {text-align:left;margin-left:1em;margin-top:-1em;padding-left:0px;}
+			
+  
+
+
+	</style>
+
+		<script src="L.Control.Window.src/L.Control.Window.js"></script>
+     	<link rel="stylesheet" href="L.Control.Window.src/L.Control.Window.css" />
+
+
+</head>
+<body>
+	<div id = "map"></div>
+   
+	<script> 
+		var map = L.map('map', {minZoom: 8})
+		.setView ([61.498, 23.76], 13)
+		.setMaxBounds([
+    	[63.824983, 19.917809],
+    	[59.860055, 27.698318]
+		])
+
+		L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=Jtg534VeEjV7UOBGhXw3', {
+			attribution: '<a id="about" href="" title="See more attributions" onclick="openwin(); return false;">About</a> | <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>', 	
+		}).addTo(map); 
+
+
+
+
+		L.circle([61.493787, 23.779339], 150, {fillColor: 'green', opacity: '0'}).addTo(map).bindPopup("Tampere University | Main Campus");
+
+		L.circle([61.450059, 23.859058], 250, {fillColor: 'green', opacity: '0'}).addTo(map).bindPopup("Tampere University | Hervanta Campus");
+
+
+		//Stores
+
+			var store = L.icon({
+    		iconUrl: 'icons/sechand.svg',
+        	iconSize:     [50, 50],
+        	iconAnchor:   [10, 25],
+        	popupAnchor:  [15, -30],
+    		}); //*Attribution Freepik Flaticon*//
+
+
+		var Store1 = L.marker([61.498878, 23.756486], {icon: store}).addTo(map).bindPopup("<h3>Fida Kuninkaankatu</h3><ul><li>Clothing: 3</li><li>Furniture: 2</li><li>Kitchenware: 2</li><li>Sportswear: 3</li><li>Sports equipment: 1</li><li>Textiles: 3</li></ul>"),
+
+		Store2 = L.marker([61.514100, 23.670842], {icon: store}).addTo(map).bindPopup("<h3>SPR Kontti</h3><ul><li>Clothing: 3</li><li>Furniture: 3</li><li>Kitchenware: 3</li><li>Sportswear: 3</li><li>Sports equipment: 3</li><li>Textiles: 3</li></ul>"),
+
+		Store3 = L.marker([61.516046, 23.672165], {icon: store}).addTo(map).bindPopup("<h3>Salvation Army Lielahti</h3><ul><li>Clothing: 3</li><li>Furniture: 3</li><li>Kitchenware: 1</li><li>Sportswear: 2</li><li>Sports equipment: 2</li><li>Textiles: 2</li></ul>"),
+
+		Store4 = L.marker([61.518004, 23.665084], {icon: store}).addTo(map).bindPopup("<h3>Fida Lielahti</h3><ul><li>Clothing: 3</li><li>Furniture: 2</li><li>Kitchenware: 2</li><li>Sportswear: 3</li><li>Sports equipment: 3</li><li>Textiles: 3</li></ul>"),
+
+		Store5 = L.marker([61.513982, 23.671698], {icon: store}).addTo(map).bindPopup("<h3>Nextiili</h3><ul><li>Clothing: 3</li><li>Furniture: 3</li><li>Kitchenware: 1</li><li>Sportswear: 1</li><li>Sports equipment: 3</li><li>Textiles: 3</li></ul>"),
+
+		Store6 = L.marker([61.499191, 23.780022], {icon: store}).addTo(map).bindPopup("<h3>Fida Tammela</h3><ul><li>Clothing: 3</li><li>Furniture: 1</li><li>Kitchenware: 2</li><li>Sportswear: 2</li><li>Sports equipment: 2</li><li>Textiles: 2</li></ul>"),
+
+		Store7 = L.marker([61.513041, 23.673647], {icon: store}).addTo(map).bindPopup("<h3>Jonnan Kirppis</h3><ul><li>Clothing: 2</li><li>Furniture: 1</li><li>Kitchenware: 2</li><li>Sportswear: 2</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store8 = L.marker([61.494751, 23.759584], {icon: store}).addTo(map).bindPopup("<h3>Radiokirppis</h3><ul><li>Clothing: 3</li><li>Furniture: 1</li><li>Kitchenware: 2</li><li>Sportswear: 2</li><li>Sports equipment: 2</li><li>Textiles: 1</li></ul>"),
+
+		Store9 = L.marker([61.495740, 23.761297], {icon: store}).addTo(map).bindPopup("<h3>Kirpputori Tarina</h3><ul><li>Clothing: 2</li><li>Furniture: 2</li><li>Kitchenware: 1</li><li>Sportswear: 1</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store10 = L.marker([61.466171, 23.719407], {icon: store}).addTo(map).bindPopup("<h3>Ropelli</h3><ul><li>Clothing: 2</li><li>Furniture: 2</li><li>Kitchenware: 2</li><li>Sportswear: 2</li><li>Sports equipment: 1</li><li>Textiles: 1</li></ul>"),
+
+		Store11 = L.marker([61.501234, 23.767235], {icon: store}).addTo(map).bindPopup("<h3>Kyttälä Flea Market</h3><ul><li>Clothing: 2</li><li>Furniture: 1</li><li>Kitchenware: 3</li><li>Sportswear: 1</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store12 = L.marker([61.499004, 23.755782], {icon: store}).addTo(map).bindPopup("<h3>ViaDia-Tori</h3><ul><li>Clothing: 2</li><li>Furniture: 2</li><li>Kitchenware: 2</li><li>Sportswear: 1</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store13 = L.marker([61.498083, 23.768140], {icon: store}).addTo(map).bindPopup("<h3>UFF center</h3><ul><li>Clothing: 3</li><li>Furniture: 1</li><li>Kitchenware: 1</li><li>Sportswear: 2</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store14 = L.marker([61.498832, 23.783476], {icon: store}).addTo(map).bindPopup("<h3>Yesterday Second Hand</h3><ul><li>Clothing: 1</li><li>Furniture: 1</li><li>Kitchenware: 1</li><li>Sportswear: 1</li><li>Sports equipment: 1</li><li>Textiles: 1</li></ul>"),
+
+		Store15 = L.marker([61.450676, 23.847127], {icon: store}).addTo(map).bindPopup("<h3>Salvation Army Hervanta</h3><ul><li>Clothing: 3</li><li>Furniture: 3</li><li>Kitchenware: 3</li><li>Sportswear: 3</li><li>Sports equipment: 3</li><li>Textiles: 3</li></ul>"),
+
+		Store16 = L.marker([61.451048, 23.852344], {icon: store}).addTo(map).bindPopup("<h3>UFF Hervanta</h3><ul><li>Clothing: 3</li><li>Furniture: 1</li><li>Kitchenware: 1</li><li>Sportswear: 3</li><li>Sports equipment: 1</li><li>Textiles: 2</li></ul>"),
+
+		Store17 = L.marker([61.487162, 23.851847], {icon: store}).addTo(map).bindPopup("<h3>Janka Recycling Center</h3><ul><li>Clothing: 2</li><li>Furniture: 3</li><li>Kitchenware: 3</li><li>Sportswear: 1</li><li>Sports equipment: 2</li><li>Textiles: 2</li></ul>"),
+
+		Store18 = L.marker([61.499107, 23.781025], {icon: store}).addTo(map).bindPopup("<h3>Bonus Kirppis</h3><ul><li>Clothing: 3</li><li>Furniture: 1</li><li>Kitchenware: 1</li><li>Sportswear: 2</li><li>Sports equipment: 1</li><li>Textiles: 1</li></ul>"),
+
+		Store19 = L.marker([61.475951, 23.795165], {icon: store}).addTo(map).bindPopup("<h3>Nekala Recycling Center</h3><ul><li>Clothing: 2</li><li>Furniture: 3</li><li>Kitchenware: 3</li><li>Sportswear: 1</li><li>Sports equipment: 3</li><li>Textiles: 3</li></ul>");
+
+		var Stores = L.layerGroup([Store1, Store2, Store3, Store4, Store5, Store6, Store7, Store8, Store9, Store10, Store11, Store12, Store13, Store14, Store15, Store16, Store17, Store18, Store19]);
+		//Stores end
+
+		//Workshops
+
+		var workshop = L.icon({
+    		iconUrl: 'icons/tools.svg',
+        	iconSize:     [45, 45],
+        	iconAnchor:   [40, 25],
+        	popupAnchor:  [-20, -35],
+    		}); //*Attribution Freepik Flaticon*//
+
+		var Workshop1 = L.marker([61.481396, 23.788718], {icon: workshop}).addTo(map).bindPopup("<h3 style='margin-bottom:0px'>Hacklab Nekala</h3><a href='https://tampere.hacklab.fi/pages/info-in-english/'>More info</a>"),
+		Workshop2 = L.marker([61.450439, 23.859689], {icon: workshop}).addTo(map).bindPopup("<h3 style='margin-bottom:0px'>Fablab Tampere</h3><a href='https://sites.tuni.fi/fablabtampere-en/'>More info</a>"),
+		Workshop3 = L.marker([61.474648, 23.506357], {icon: workshop}).addTo(map).bindPopup("<h3 style='margin-bottom:0px'>Hacklab Nokia</h3><a href='https://uusinokia.fi/'>More info</a>"); 
+
+		var Workshops = L.layerGroup([Workshop1, Workshop2, Workshop3]);
+
+		//Workshops end
+
+		//Recycling
+
+		var recycle = L.icon({
+    		iconUrl: 'icons/recycle.png',
+        	iconSize:     [44, 43],
+        	iconAnchor:   [40, 25],
+        	popupAnchor:  [-20, -35],
+    		});
+
+		var Recycle1 = L.marker([61.502374, 23.778396], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle2 = L.marker([61.479266, 23.781243], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle3 = L.marker([61.489812, 23.823482], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle4 = L.marker([61.474528, 23.870918], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle5 = L.marker([61.509799, 23.779184], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>");
+
+		var Recycles = L.layerGroup([Recycle1, Recycle2, Recycle3, Recycle4, Recycle5]);
+
+		//Recycling end
+
+		//Rental
+
+		var rental = L.icon({
+    		iconUrl: 'icons/time-left.svg',
+        	iconSize:     [45, 45],
+        	iconAnchor:   [10, 25],
+        	popupAnchor:  [15, -30],
+    		});//*Attribution Freepik Flaticon*//
+
+
+		var Rental1 = L.marker([61.498153, 23.750558], {icon: rental}).addTo(map).bindPopup("<h3>Library Metso</h3><ul><li>Cultural and sport events pass</li><li>Laptops</li>& more @ <a href=https://www.tampere.fi/en/culture-and-leisure/libraries/computers-and-appliances.html>City of Tampere</a></ul>"),
+		Rental2 = L.marker([61.493820, 23.779379], {icon: rental}).addTo(map).bindPopup("<h3>TREY student union</h3><ul><li>Power drill & toolbox</li><li>Kyykkä sets</li><li>Van & trailer rentals</li>See more @ <a href=https://trey.fi/en/for-members/member-services>TREY</a></ul>"),
+		Rental3 = L.marker([61.498020, 23.788742], {icon: rental}).addTo(map).bindPopup("<h3>Library Sampola/Tietotori</h3><ul><li>3D printers & Vinyl cutter</li><li>Sewing machine</li><li>Laptops</li><li>Digitizing services</li>& more @ <a href=https://www.tampere.fi/en/culture-and-leisure/libraries/computers-and-appliances.html>City of Tampere</a></ul>"),
+		Rental4 = L.marker([61.450170, 23.848774], {icon: rental}).addTo(map).bindPopup("<h3>Library Hervanta</h3><ul><li>Digitizing services</li>& more @ <a href=https://www.tampere.fi/en/culture-and-leisure/libraries/computers-and-appliances.html>City of Tampere</a></ul>");
+
+
+		var Rentals = L.layerGroup([Rental1, Rental2, Rental3, Rental4]);
+
+		//Rentals end
+
+		//Food 
+
+			var food = L.icon({
+    		iconUrl: 'icons/food.svg',
+        	iconSize:     [45, 45],
+        	iconAnchor:   [10, 25],
+        	popupAnchor:  [15, -30],
+    		});//*Attribution Freepik Flaticon*//
+
+
+		var Ecovillage = L.marker([61.306032, 23.586392], {icon: food}).addTo(map).bindPopup("<h3>Kurjen Tila ecovillage</h3><ul><li>Biodynamic farming</li><li>Volunteering opportunities</li><li>Summer kiosk in Vesilahti</li><a href=https://kurjentila.fi/english>More info</a></ul>"),
+
+		Food1 = L.marker([61.502062, 23.778720], {icon: food}).addTo(map).bindPopup("<h3>Tammela Market</h3><ul><li>Local products (during summer)</li><li>Package-free!</li></ul>"),
+
+		Food2 = L.marker([61.437685, 24.408133], {icon: food}).addTo(map).bindPopup("<h3>Sarkalan Tila (farm)</h3><ul><li>Organic eggs and beef</li><a href=https://kangasalanlahiruoka.fi/sarkalan-tila/>More info</a> (only in Finnish)</ul>"),
+		Food3 = L.marker([61.492296, 23.780425], {icon: food}).addTo(map).bindPopup("<h3>Tampiiri pick-up</h3><ul><li>Local farm products</li><li>Orders from Tampiiri & Tietäväinen</li><a href=https://tampiiri.fi/en>More info</a></ul>"),
+		Food4 = L.marker([61.422790, 24.185304], {icon: food}).addTo(map).bindPopup("<h3>Rekola Puutarha (farm)</h3><ul><li>Organic farm products</li><li>Biodynamic farm?</li><li>Deliveries to Tampere</li><a href=https://rekolanpuutarha.com/>More info</a> (only in Finnish)</ul>");
+
+		var Foods = L.layerGroup([Ecovillage, Food1, Food2, Food3, Food4]);
+
+		//Foods end
+		
+		//Legend
+
+		var legend = L.control({position: "bottomright"});
+
+		legend.onAdd = function(map) {
+  		var div = L.DomUtil.create("div", "legend");
+  		div.innerHTML += "<h4>Store Inventory Legend</h4>";
+  		div.innerHTML += '<span>1 =</span> <span>Rarely in stock</span><br>';
+  		div.innerHTML += '<span>2 =</span> <span>Sometimes in stock / small offer</span><br>';
+  		div.innerHTML += '<span>3 =</span> <span>Often in stock</span><br>';
+  		;
+
+  		return div;
+		};
+
+		legend.addTo(map);
+			
+		var overlayMaps = {
+    	"<img src='icons/sechand.svg' height='39' width='42'><p class='legendcat'>Stores</p>": Stores,
+    	"<img src='icons/tools.svg' height='40' width='40'><p class='legendcat'>Workshops</p>": Workshops,
+    	"<img src='icons/recycle.png' height='40' width='40'><p class='legendcat'>Recycling</p>": Recycles,
+    	"<img src='icons/food.svg' height='40' width='40'><p class='legendcat'>Food</p>": Foods,
+    	"<img src='icons/time-left.svg' height='40' width='40'><p class='legendcat'>Rentals</p>": Rentals,
+		};
+
+
+		L.control.layers(null, overlayMaps, {
+  		collapsed: false
+		}).addTo(map);
+
+		
+
+		//Legend
+
+		//'About' window 
+		
+
+       	function openwin(){
+
+        var win =  L.control.window(map,{title:'About',maxWidth:500,modal: true})
+                .content('This map is an open and collective project. Please share it! <br>This was the result of volunteering efforts and the quality of the work will increase with your contribution. <br>These following elements are attributed to their creators/contributors:<br>Map created by Victor Theoret (victor.theoret@tuni.fi);<br><span>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> Flaticon</a>; <br>The <b>leaflet-control-window software</b>  (what you see now) was created by <a href="https://github.com/mapshakers/leaflet-control-window" title="Github link">Filip Zavadil</a> under the MIT license.')
+                .show()
+    	};
+
+
+        //'About' window 
+
+
+
+		</script>
+        
+      
+
+</body>
+
+</html>
