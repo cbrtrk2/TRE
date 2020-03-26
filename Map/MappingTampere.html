@@ -18,9 +18,18 @@
 
 	<style> 
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;}
-		.leaflet-popup-content-wrapper {border-radius: 25 px; border: 2 px solid #black; background: white; color: black; font-size: 18 px;}
+		.leaflet-popup-content-wrapper {
+			max-width: 60%; 
+			max-height: 80%; 
+			border-radius: 25 px; 
+			border: 2 px solid #black; 
+			background: white; 
+			color: black; 
+			font-size: 18 px;}
 		.leaflet-popup-tip {background: green} 
 		.legend {
+			max-width: 60%;
+			max-height: 60%; 
   			padding: 10px 5px;
  			font: 14px sans-serif;
   			background: white;
@@ -57,7 +66,6 @@
 
   			h3 {text-align: center;}
 			ul {text-align:left;margin-left:1em;margin-top:-1em;padding-left:0px;}
-			
   
 
 
@@ -65,12 +73,14 @@
 
 		<script src="L.Control.Window.src/L.Control.Window.js"></script>
      	<link rel="stylesheet" href="L.Control.Window.src/L.Control.Window.css" />
-
+    
+    	<script src="jquery.js"></script> 
 
 </head>
 <body>
 	<div id = "map"></div>
-   
+
+
 	<script> 
 		var map = L.map('map', {minZoom: 8})
 		.setView ([61.498, 23.76], 13)
@@ -249,9 +259,8 @@
 		L.control.layers(null, overlayMaps, {
   		collapsed: false
 		}).addTo(map);
-
+		$(".leaflet-control-layers-selector").prop("checked", true);
 		
-
 		//Legend
 
 		//'About' window 
