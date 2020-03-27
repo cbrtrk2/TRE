@@ -19,17 +19,13 @@
 	<style> 
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;}
 		.leaflet-popup-content-wrapper {
-			max-width: 60%; 
-			max-height: 80%; 
-			border-radius: 25 px; 
-			border: 2 px solid #black; 
+			border-radius: 25px; 
+			border: 2px solid #black; 
 			background: white; 
 			color: black; 
-			font-size: 18 px;}
+			font-size: 18px;}
 		.leaflet-popup-tip {background: green} 
 		.legend {
-			max-width: 60%;
-			max-height: 60%; 
   			padding: 10px 5px;
  			font: 14px sans-serif;
   			background: white;
@@ -67,7 +63,14 @@
   			h3 {text-align: center;}
 			ul {text-align:left;margin-left:1em;margin-top:-1em;padding-left:0px;}
   
-
+		@media screen and (max-width: 450px) {
+ 			.legend {
+    		width: 80%;
+  			}
+  			.leaflet-control-layers{
+    		width: 70%;
+  			}
+			}
 
 	</style>
 
