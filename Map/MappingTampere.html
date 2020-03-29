@@ -5,27 +5,25 @@
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
 
-   <title>Mapping Sustainability in Tampere</title>
+   <title>Sustainability Map in Tampere</title>
 
 	<meta name="keywords" content="Tampere, sustainable, sustainability, student, map, local, second hand, repair, public, common">
-
 
    	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
 
-   
-
 	<style> 
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;}
 		.leaflet-popup-content-wrapper {
-			border-radius: 25px; 
-			border: 2px solid #black; 
+			border-radius: 10px;  
 			background: white; 
 			color: black; 
-			font-size: 18px;}
+			font-size: 14px;
+			}
 		.leaflet-popup-tip {background: green} 
 		.legend {
+			width: 85%;
   			padding: 10px 5px;
  			font: 14px sans-serif;
   			background: white;
@@ -47,6 +45,7 @@
   			text-align: center;
 			}
 			.leaflet-control-layers {
+			width: 80%;
 			padding: 10px 5px;
 			font: 14px sans-serif;
   			background: white;
@@ -95,8 +94,6 @@
 		L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=Jtg534VeEjV7UOBGhXw3', {
 			attribution: '<a id="about" href="" title="See more attributions" onclick="openwin(); return false;">About</a> | <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>', 	
 		}).addTo(map); 
-
-
 
 
 		L.circle([61.493787, 23.779339], 150, {fillColor: 'green', opacity: '0'}).addTo(map).bindPopup("Tampere University | Main Campus");
@@ -185,9 +182,15 @@
 		Recycle2 = L.marker([61.479266, 23.781243], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
 		Recycle3 = L.marker([61.489812, 23.823482], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
 		Recycle4 = L.marker([61.474528, 23.870918], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
-		Recycle5 = L.marker([61.509799, 23.779184], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>");
+		Recycle5 = L.marker([61.509799, 23.779184], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle6 = L.marker([61.474998, 23.870375], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle7 = L.marker([61.448371, 23.835859], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle8 = L.marker([61.464600, 23.888171], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle9 = L.marker([61.495432, 23.623896], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle10 = L.marker([61.477918, 23.523899], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Plastic</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>"),
+		Recycle11 = L.marker([61.441851, 23.852152], {icon: recycle}).addTo(map).bindPopup("<h3>Recycling Drop Point</h3><ul><li>Textiles</li>& more @ <a href=https://www.kierratys.info/>Kierratys.info</a></ul>");
 
-		var Recycles = L.layerGroup([Recycle1, Recycle2, Recycle3, Recycle4, Recycle5]);
+		var Recycles = L.layerGroup([Recycle1, Recycle2, Recycle3, Recycle4, Recycle5, Recycle6, Recycle7, Recycle8, Recycle9, Recycle10, Recycle11]);
 
 		//Recycling end
 
@@ -267,7 +270,6 @@
 		//Legend
 
 		//'About' window 
-		
 
        	function openwin(){
 
@@ -276,14 +278,10 @@
                 .show()
     	};
 
-
         //'About' window 
 
 
-
 		</script>
-        
-      
 
 </body>
 
